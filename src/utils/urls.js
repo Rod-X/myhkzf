@@ -1,0 +1,1 @@
+export let API_URL = "http://hkzf.zbztb.cn"
