@@ -3,6 +3,7 @@ import Axios from '../../utils/request'
 
 export default class index extends Component {
 
+
     
     componentDidMount(){
         Axios.get("/home/swiper").then((res)=>{
