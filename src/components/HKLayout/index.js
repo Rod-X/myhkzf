@@ -29,7 +29,7 @@ class TabBarExample extends React.Component {
               this.props.history.push("/")
             }}
           >
-            {this.props.children}
+            {this.props.match.path==="/"&&this.props.children}
           </TabBar.Item>
           <TabBar.Item
             title="找房"
@@ -43,7 +43,7 @@ class TabBarExample extends React.Component {
               this.props.history.push("/list")
             }}
           >
-            {this.props.children}
+            {this.props.match.path==="/list"&&this.props.children}
           </TabBar.Item>         
           <TabBar.Item
             title="资讯"
@@ -57,7 +57,7 @@ class TabBarExample extends React.Component {
               this.props.history.push("/info")
             }}
           >
-            {this.props.children}
+            {this.props.match.path==="/info"&&this.props.children}
           </TabBar.Item>         
           <TabBar.Item
             title="我的"
@@ -71,7 +71,7 @@ class TabBarExample extends React.Component {
               this.props.history.push("/profile")
             }}
           >
-            {this.props.children}
+            {this.props.match.path==="/profile"&&this.props.children}
           </TabBar.Item>
         </TabBar>
       </div>
