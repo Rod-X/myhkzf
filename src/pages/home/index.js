@@ -17,13 +17,26 @@ export default class index extends Component {
                 {pic:nav2,name:'合租'},
                 {pic:nav3,name:'地图找房' },
                 {pic:nav4,name:'去出租' }
-            ]
+            ],
+            news:[],
+            groups:[]
         } 
     componentDidMount(){
         Axios.get("/home/swiper").then((res)=>{
             // console.log(res);
             this.setState({
                 swiper_list:res.body
+            })
+        })
+        Axios.get("/home/news").then((res)=>{
+            console.log(res);
+            this.setState({
+                news:res.body
+            })
+        })
+        Axios.get("/home/groups").then((res)=>{
+            this.setState({
+                groups:res.body
             })
         })
     }
@@ -36,7 +49,7 @@ export default class index extends Component {
                     <Carousel
                         autoplay={true}
                         infinite
-        >
+                        >
           {this.state.swiper_list.map(val => (
             <a
               key={val.id}
@@ -61,12 +74,45 @@ export default class index extends Component {
                         {
                             this.state.nav.map((val,i)=>(
                                 <div className="home_nav_item" key={i}>
-                                    <img src={val.pic}></img>
+                                    <img src={val.pic} alt=""></img>
                                     <p>{val.name}</p>
                                 </div>
                             ))
                         }
                     </div>
+                    <div className="home_groups">
+                        <div className="home_groups_top">
+                            <span>租房小组</span>
+                            <span>更多</span>
+                        </div>
+                        <div className="home_groups_items">
+                        {this.state.groups.map((val,i)=>(
+                            <div className="home_groups_item" key={i}>
+                                <div className="home_groups_item_left">
+                                    <span>{val.title}</span>
+                                    <p>{val.desc}</p>
+                                </div>
+                                <img src={API_URL+val.imgSrc} alt=""></img>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                
+                    <div className="home_list">
+                    <p className="home_list_p">最新资讯</p>
+                        {this.state.news.map((val,i)=>(
+                            <div className="home_list_item" key={i}>
+                                <img src={API_URL+val.imgSrc} alt="" className="home_list_item_img"></img>
+                                <div className="home_list_item_right">
+                                    <p className="home_list_item_right_title">{val.title}</p>
+                                    <div className="home_list_item_right_span">
+                                        <span>{val.from}</span>
+                                        <span>{val.date}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                </div>
                 </div>
                 
             </Fragment>
